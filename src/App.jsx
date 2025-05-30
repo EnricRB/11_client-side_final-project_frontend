@@ -1,54 +1,13 @@
-import { useState } from 'react'
-import Container from './components/Container'
-import './App.css'
+import React from 'react';
+import BookList from './components/BookList';
 
 function App() {
-  const [books, setBooks] = useState([])
-  const [isFormVisible, setIsFormVisible] = useState(false)
-  const [selectedBook, setSelectedBook] = useState(null)
-
-  const handleAddBook = () => {
-    setSelectedBook(null)
-    setIsFormVisible(true)
-  }
-
-  const handleEditBook = (book) => {
-    setSelectedBook(book)
-    setIsFormVisible(true)
-  }
-
-  const handleDeleteBook = (bookId) => {
-    setBooks(books.filter(book => book.id !== bookId))
-  }
-
-  const handleFormSubmit = (bookData) => {
-    if (selectedBook) {
-      setBooks(books.map(book => 
-        book.id === selectedBook.id ? { ...bookData, id: book.id } : book
-      ))
-    } else {
-      setBooks([...books, { ...bookData, id: Date.now().toString() }])
-    }
-    setIsFormVisible(false)
-  }
-
-  const handleFormCancel = () => {
-    setIsFormVisible(false)
-    setSelectedBook(null)
-  }
-
   return (
-    <Container 
-      books={books}
-      isFormVisible={isFormVisible}
-      selectedBook={selectedBook}
-      onAddBook={handleAddBook}
-      onEdit={handleEditBook}
-      onDelete={handleDeleteBook}
-      onSubmit={handleFormSubmit}
-      onCancel={handleFormCancel}
-    />
-  )
+    <div>
+      <h1>Mi Biblioteca</h1>
+      <BookList />
+    </div>
+  );
 }
 
-export default App
+export default App;

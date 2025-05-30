@@ -2,9 +2,13 @@ name: Lint and Format
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [ develop, main ]
   pull_request:
-    branches: [ main, develop ]
+    branches: [ develop, main ]
+
+permissions:
+  contents: write
+  pull-requests: write
 
 jobs:
   lint-format:
@@ -12,6 +16,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
     
     - name: Setup Node.js
       uses: actions/setup-node@v4
@@ -22,5 +28,17 @@ jobs:
     - name: Install dependencies
       run: npm ci
     
-    - name: Run lint-staged
-      run: npx lint-staged 
+    - name: Run linting and formatting
+      run: |
+        npm run lint
+        npm run format
+
+    - name: Create Pull Request
+      uses: peter-evans/create-pull-request@v5
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        commit-message: 'chore: apply linting and formatting'
+        title: 'chore: apply linting and formatting'
+        body: 'Automated linting and formatting fixes'
+        branch: 'chore/lint-format'
+        base: ${{ github.head_ref }} 
