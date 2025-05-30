@@ -46,6 +46,7 @@ const BookList = () => {
       const newBook = await response.json();
       setBooks([...books, newBook]);
       setIsFormVisible(false);
+      fetchBooks();
     } catch (error) {
       console.error('Error adding book:', error);
     }
@@ -60,8 +61,10 @@ const BookList = () => {
         },
         body: JSON.stringify(bookData),
       });
-      const updatedBook = await response.json();
-      setBooks(books.map((book) => (book.id === updatedBook.id ? updatedBook : book)));
+      if (!response.ok) {
+        throw new Error('Error al actualizar el libro');
+      }
+      fetchBooks();
       setSelectedBook(null);
       setIsFormVisible(false);
     } catch (error) {
@@ -71,10 +74,13 @@ const BookList = () => {
 
   const handleDeleteBook = async (bookId) => {
     try {
-      await fetch(`${import.meta.env.VITE_API_URL}/Book/${bookId}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/Book/${bookId}`, {
         method: 'DELETE',
       });
-      setBooks(books.filter((book) => book.id !== bookId));
+      if (!response.ok) {
+        throw new Error('Error al eliminar el libro');
+      }
+      fetchBooks();
     } catch (error) {
       console.error('Error deleting book:', error);
     }
@@ -82,6 +88,12 @@ const BookList = () => {
 
   const handleCancelForm = () => {
     setIsFormVisible(false);
+    setSelectedBook(null);
+  };
+
+  const handleShowEditForm = (book) => {
+    setSelectedBook(book);
+    setIsFormVisible(true);
   };
 
   return (
@@ -94,6 +106,7 @@ const BookList = () => {
           setSelectedBook(null);
           setIsFormVisible(true);
         }}
+        disabled={isFormVisible}
       >
         Add New Book
       </button>
@@ -122,10 +135,7 @@ const BookList = () => {
               <BookCard
                 key={book.id}
                 book={book}
-                onEdit={(book) => {
-                  setSelectedBook(book);
-                  setIsFormVisible(true);
-                }}
+                onEdit={handleShowEditForm}
                 onDelete={handleDeleteBook}
               />
             ))}
