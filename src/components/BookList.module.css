@@ -1,75 +1,114 @@
 .bookList {
-  padding: 1rem;
   max-width: 1200px;
   margin: 0 auto;
+  padding: 2rem;
+  width: 100%;
 }
 
 .title {
-  font-size: 2rem;
   color: #333;
-  margin-bottom: 2rem;
   text-align: center;
+  margin-bottom: 2rem;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
 }
 
-.grid {
+.addButton {
+  display: block;
+  margin: 0 auto 2rem;
+  padding: 0.75rem 1.5rem;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.2s ease;
+  font-size: clamp(0.9rem, 1.5vw, 1rem);
+}
+
+.addButton:hover {
+  background-color: #45a049;
+}
+
+.bookGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 2rem;
-  padding: 1rem;
+  padding: 0;
+  margin: 0 auto;
+  list-style: none;
+  width: 100%;
+  grid-template-columns: 1fr;
 }
 
 .bookCard {
-  background: white;
+  background-color: #ffffff;
   border-radius: 8px;
   padding: 1.5rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease;
+  transition: transform 0.2s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: none;
+  box-sizing: border-box;
 }
 
 .bookCard:hover {
-  transform: translateY(-2px);
+  transform: translateY(-5px);
 }
 
 .bookCard h3 {
-  font-size: 1.25rem;
+  font-size: clamp(1.2rem, 2vw, 1.5rem);
   color: #333;
   margin-bottom: 1rem;
+  word-wrap: break-word;
 }
 
 .bookCard p {
   color: #666;
   margin: 0.5rem 0;
+  font-size: clamp(0.9rem, 1.5vw, 1rem);
 }
 
-.loading {
+.loading,
+.error,
+.emptyMessage {
   text-align: center;
-  font-size: 1.2rem;
-  color: #666;
-  padding: 2rem;
+  margin-top: 20px;
+  color: #555;
 }
 
 .error {
-  background-color: #ffebee;
-  color: #c62828;
-  padding: 1rem;
-  border-radius: 4px;
-  text-align: center;
-  margin: 1rem 0;
+  color: #dc3545;
 }
 
-.emptyMessage {
-  text-align: center;
-  color: #666;
-  font-size: 1.2rem;
-  margin: 2rem 0;
-}
-
-@media (max-width: 768px) {
-  .grid {
-    grid-template-columns: 1fr;
+@media (min-width: 600px) {
+  .bookGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    justify-items: stretch;
   }
-  
+}
+
+@media (min-width: 900px) {
+  .bookGrid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    justify-items: stretch;
+  }
+}
+
+@media (max-width: 480px) {
   .bookList {
-    padding: 0.5rem;
+    padding: 1rem;
+  }
+
+  .bookGrid {
+    gap: 1rem;
+  }
+
+  .addButton {
+    width: 100%;
+    margin-bottom: 1rem;
   }
 } 

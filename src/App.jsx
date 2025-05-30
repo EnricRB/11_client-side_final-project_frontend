@@ -1,10 +1,10 @@
 import React from 'react';
 import BookList from './components/BookList';
+import './App.css';
 
 function App() {
   return (
-    <div>
-      <h1>Mi Biblioteca</h1>
+    <div className="App">
       <BookList />
     </div>
   );

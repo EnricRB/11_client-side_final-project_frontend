@@ -4,10 +4,16 @@ import styles from './BookCard.module.css';
 const BookCard = ({ book, onEdit, onDelete }) => {
   return (
     <div className={styles.bookCard}>
-      <h3>{book.title}</h3>
-      <p>Autor: {book.author}</p>
-      <p>Año: {book.year}</p>
-      <p>Estado: {book.status}</p>
+      <div className={styles.bookInfo}>
+        <div className={styles.titleAndAuthor}>
+          <h3>{book.title}</h3>
+          <p>{book.author}</p>
+        </div>
+        <span className={styles.year}>{book.year}</span>
+      </div>
+      <span className={`${styles.statusTag} ${styles[book.status.replace(' ', '')]}`}>
+        {book.status}
+      </span>
       <div className={styles.actions}>
         <button onClick={() => onEdit(book)} className={styles.editButton}>
           Editar

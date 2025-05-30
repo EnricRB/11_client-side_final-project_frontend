@@ -97,7 +97,7 @@ const BookList = () => {
   };
 
   return (
-    <div className={styles.container}>
+    <div className={styles.bookList}>
       <h1 className={styles.title}>My Book Collection</h1>
 
       <button

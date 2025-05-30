@@ -1,24 +1,78 @@
 .bookCard {
-  border: 1px solid #ccc;
+  border: 1px solid #e0e0e0;
   border-radius: 8px;
   padding: 15px;
   margin-bottom: 15px;
   background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+}
+
+.bookInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 10px;
+}
+
+.titleAndAuthor {
+  flex-grow: 1;
+  margin-right: 10px;
+  text-align: left;
 }
 
 .bookCard h3 {
-  margin-top: 0;
+  margin: 0 0 5px 0;
   color: #333;
+  font-size: 1.1em;
+  text-align: left;
+  width: 100%;
 }
 
 .bookCard p {
-  margin-bottom: 5px;
+  margin: 0 0 5px 0;
   color: #666;
+  font-size: 0.9em;
+  text-align: left;
+  width: 100%;
+}
+
+.year {
+  font-size: 0.8em;
+  color: #888;
+  background-color: #f0f0f0;
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+.statusTag {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.7em;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-transform: capitalize;
+}
+
+.statusTag.completed {
+  background-color: #e9f7ef;
+  color: #28a745;
+}
+
+.statusTag.inprogress {
+  background-color: #e0f7ff;
+  color: #007bff;
+}
+
+.statusTag.pending {
+  background-color: #fff3cd;
+  color: #ffc107;
 }
 
 .actions {
-  margin-top: 15px;
+  margin-top: auto; /* Push actions to the bottom */
   display: flex;
   gap: 10px;
 }
@@ -26,26 +80,24 @@
 .editButton,
 .deleteButton {
   padding: 8px 12px;
-  border: none;
+  border: 1px solid #ccc;
   border-radius: 4px;
   cursor: pointer;
   font-size: 0.9em;
-}
-
-.editButton {
-  background-color: #f0ad4e;
-  color: white;
+  background-color: #f8f9fa;
+  color: #333;
+  transition: background-color 0.2s ease;
 }
 
 .editButton:hover {
-  background-color: #ec971f;
+  background-color: #e2e6ea;
 }
 
 .deleteButton {
-  background-color: #d9534f;
-  color: white;
+  border-color: #dc3545;
+  color: #dc3545;
 }
 
 .deleteButton:hover {
-  background-color: #c9302c;
+  background-color: #f8d7da;
 } 
