@@ -86,7 +86,7 @@ const BookForm = ({ book, onSubmit, onCancel }) => {
         <select id="status" name="status" value={bookData.status} onChange={handleChange}>
           <option value="pending">Pendiente</option>
           <option value="in progress">En progreso</option>
-          <option value="read">Leído</option>
+          <option value="completed">Leído</option>
         </select>
       </div>
 
