@@ -1,98 +1,81 @@
-import { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState } from 'react';
+import styles from './BookForm.module.css';
 
-const BookForm = ({ book, onSubmit, onCancel }) => {
-  const [formData, setFormData] = useState({
+const BookForm = ({ onSubmit, onCancel }) => {
+  const [bookData, setBookData] = useState({
     title: '',
     author: '',
-    genre: '',
-    publicationDate: '',
+    year: '',
+    status: 'pending',
   });
-
-  useEffect(() => {
-    if (book) {
-      setFormData({
-        title: book.title,
-        author: book.author,
-        genre: book.genre,
-        publicationDate: book.publicationDate.split('T')[0],
-      });
-    }
-  }, [book]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
+    setBookData((prevState) => ({
+      ...prevState,
+      [name]: value,
     }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(formData);
+    onSubmit(bookData);
   };
 
   return (
-    <form onSubmit={handleSubmit} className="book-form">
-      <h2>{book ? 'Editar Libro' : 'Añadir Nuevo Libro'}</h2>
-      
-      <div className="form-group">
-        <label htmlFor="title">Título</label>
+    <form onSubmit={handleSubmit} className={styles.form}>
+      <h2>Añadir Nuevo Libro</h2>
+
+      <div className={styles.formGroup}>
+        <label htmlFor="title">Título:</label>
         <input
           type="text"
           id="title"
           name="title"
-          value={formData.title}
+          value={bookData.title}
           onChange={handleChange}
           required
-          placeholder="Introduce el título del libro"
         />
       </div>
 
-      <div className="form-group">
-        <label htmlFor="author">Autor</label>
+      <div className={styles.formGroup}>
+        <label htmlFor="author">Autor:</label>
         <input
           type="text"
           id="author"
           name="author"
-          value={formData.author}
+          value={bookData.author}
           onChange={handleChange}
           required
-          placeholder="Introduce el nombre del autor"
         />
       </div>
 
-      <div className="form-group">
-        <label htmlFor="genre">Género</label>
+      <div className={styles.formGroup}>
+        <label htmlFor="year">Año de publicación:</label>
         <input
-          type="text"
-          id="genre"
-          name="genre"
-          value={formData.genre}
-          onChange={handleChange}
-          required
-          placeholder="Introduce el género del libro"
-        />
-      </div>
-
-      <div className="form-group">
-        <label htmlFor="publicationDate">Fecha de Publicación</label>
-        <input
-          type="date"
-          id="publicationDate"
-          name="publicationDate"
-          value={formData.publicationDate}
+          type="number"
+          id="year"
+          name="year"
+          value={bookData.year}
           onChange={handleChange}
           required
         />
       </div>
 
-      <div className="form-actions">
-        <button type="submit" className="btn-primary">
-          {book ? 'Actualizar' : 'Crear'}
+      <div className={styles.formGroup}>
+        <label htmlFor="status">Estado:</label>
+        <select id="status" name="status" value={bookData.status} onChange={handleChange}>
+          <option value="pending">Pendiente</option>
+          <option value="in progress">En progreso</option>
+          <option value="read">Leído</option>
+        </select>
+      </div>
+
+      <div className={styles.formActions}>
+        <button type="submit" className={styles.submitButton}>
+          Guardar Libro
         </button>
-        <button type="button" onClick={onCancel} className="btn-secondary">
+        <button type="button" onClick={onCancel} className={styles.cancelButton}>
           Cancelar
         </button>
       </div>
@@ -100,16 +83,4 @@ const BookForm = ({ book, onSubmit, onCancel }) => {
   );
 };
 
-BookForm.propTypes = {
-  book: PropTypes.shape({
-    id: PropTypes.string,
-    title: PropTypes.string,
-    author: PropTypes.string,
-    genre: PropTypes.string,
-    publicationDate: PropTypes.string,
-  }),
-  onSubmit: PropTypes.func.isRequired,
-  onCancel: PropTypes.func.isRequired,
-};
-
-export default BookForm; 
+export default BookForm;
