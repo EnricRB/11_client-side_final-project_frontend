@@ -11,16 +11,14 @@ const BookForm = ({ book, onSubmit, onCancel }) => {
 
   useEffect(() => {
     if (book) {
-      // If a book prop is provided, initialize form state with book data
       setBookData({
         title: book.title || '',
         author: book.author || '',
         year: book.year || '',
         status: book.status || 'pending',
-        id: book.id, // Keep the ID for updates
+        id: book.id,
       });
     } else {
-      // If no book prop, reset form for adding
       setBookData({
         title: '',
         author: '',
@@ -28,7 +26,7 @@ const BookForm = ({ book, onSubmit, onCancel }) => {
         status: 'pending',
       });
     }
-  }, [book]); // Rerun effect if the book prop changes
+  }, [book]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -40,7 +38,7 @@ const BookForm = ({ book, onSubmit, onCancel }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(bookData); // Pass current bookData including id if editing
+    onSubmit(bookData);
   };
 
   return (

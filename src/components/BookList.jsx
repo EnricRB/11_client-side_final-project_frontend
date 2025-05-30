@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import BookCard from '../BookCard/BookCard';
-import BookForm from '../BookForm/BookForm';
 import styles from './BookList.module.css';
+import BookForm from './BookForm';
+import BookCard from './BookCard';
 
 const BookList = () => {
   const [books, setBooks] = useState([]);
