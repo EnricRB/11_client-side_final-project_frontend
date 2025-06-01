@@ -1,0 +1,114 @@
+.bookList {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  width: 100%;
+}
+
+.title {
+  color: #333;
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+}
+
+.addButton {
+  display: block;
+  margin: 0 auto 2rem;
+  padding: 0.75rem 1.5rem;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.2s ease;
+  font-size: clamp(0.9rem, 1.5vw, 1rem);
+}
+
+.addButton:hover {
+  background-color: #45a049;
+}
+
+.bookGrid {
+  display: grid;
+  gap: 2rem;
+  padding: 0;
+  margin: 0 auto;
+  list-style: none;
+  width: 100%;
+  grid-template-columns: 1fr;
+}
+
+.bookCard {
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: none;
+  box-sizing: border-box;
+}
+
+.bookCard:hover {
+  transform: translateY(-5px);
+}
+
+.bookCard h3 {
+  font-size: clamp(1.2rem, 2vw, 1.5rem);
+  color: #333;
+  margin-bottom: 1rem;
+  word-wrap: break-word;
+}
+
+.bookCard p {
+  color: #666;
+  margin: 0.5rem 0;
+  font-size: clamp(0.9rem, 1.5vw, 1rem);
+}
+
+.loading,
+.error,
+.emptyMessage {
+  text-align: center;
+  margin-top: 20px;
+  color: #555;
+}
+
+.error {
+  color: #dc3545;
+}
+
+@media (min-width: 600px) {
+  .bookGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    justify-items: stretch;
+  }
+}
+
+@media (min-width: 900px) {
+  .bookGrid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    justify-items: stretch;
+  }
+}
+
+@media (max-width: 480px) {
+  .bookList {
+    padding: 1rem;
+  }
+
+  .bookGrid {
+    gap: 1rem;
+  }
+
+  .addButton {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+} 
