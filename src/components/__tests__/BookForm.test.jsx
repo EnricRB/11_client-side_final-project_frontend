@@ -12,11 +12,15 @@ describe('BookForm', () => {
   });
 
   afterEach(() => {
-    cleanup(); // Limpiar el DOM después de cada test
+    cleanup();
   });
 
   it('renders the BookForm component', () => {
+    // Arrange
     render(<BookForm onSubmit={mockOnSubmit} onCancel={mockOnCancel} />);
+    // Act
+    // (No hay acción, solo renderizado)
+    // Assert
     expect(screen.getByLabelText(/Título/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/Autor/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/Año/i)).toBeInTheDocument();
@@ -26,16 +30,16 @@ describe('BookForm', () => {
   });
 
   it('calls onSubmit with form data when submitted', async () => {
+    // Arrange
     render(<BookForm onSubmit={mockOnSubmit} onCancel={mockOnCancel} />);
-
+    // Act
     fireEvent.change(screen.getByLabelText(/Título/i), { target: { value: 'Nuevo Título' } });
     fireEvent.change(screen.getByLabelText(/Autor/i), { target: { value: 'Nuevo Autor' } });
     fireEvent.change(screen.getByLabelText(/Año/i), { target: { value: '2024' } });
     fireEvent.change(screen.getByLabelText(/Estado/i), { target: { value: 'pending' } });
-
     const submitButton = screen.getByRole('button', { name: /Guardar/i });
     fireEvent.click(submitButton);
-
+    // Assert
     expect(mockOnSubmit).toHaveBeenCalledWith({
       title: 'Nuevo Título',
       author: 'Nuevo Autor',
@@ -45,9 +49,12 @@ describe('BookForm', () => {
   });
 
   it('calls onCancel when Cancel button is clicked', () => {
+    // Arrange
     render(<BookForm onSubmit={mockOnSubmit} onCancel={mockOnCancel} />);
     const cancelButton = screen.getByRole('button', { name: /Cancelar/i });
+    // Act
     fireEvent.click(cancelButton);
+    // Assert
     expect(mockOnCancel).toHaveBeenCalled();
   });
 });

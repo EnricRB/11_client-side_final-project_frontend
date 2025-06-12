@@ -15,19 +15,20 @@ describe('BookCard', () => {
   const mockOnDelete = vi.fn();
 
   beforeEach(() => {
-    // Limpiar los mocks antes de cada test
     mockOnEdit.mockClear();
     mockOnDelete.mockClear();
   });
 
   afterEach(() => {
-    cleanup(); // Limpiar el DOM después de cada test
+    cleanup();
   });
 
   it('renders the BookCard component with book details', () => {
+    // Arrange
     render(<BookCard book={exampleBook} onEdit={mockOnEdit} onDelete={mockOnDelete} />);
-
-    // Verifica que los detalles del libro se renderizan
+    // Act
+    // (No hay acción, solo renderizado)
+    // Assert
     expect(screen.getByText('Título de prueba')).toBeInTheDocument();
     expect(screen.getByText('Autor de prueba')).toBeInTheDocument();
     expect(screen.getByText('2023')).toBeInTheDocument();
@@ -35,16 +36,22 @@ describe('BookCard', () => {
   });
 
   it('calls onEdit with the book data when Edit button is clicked', () => {
+    // Arrange
     render(<BookCard book={exampleBook} onEdit={mockOnEdit} onDelete={mockOnDelete} />);
     const editButton = screen.getByText('Editar');
+    // Act
     fireEvent.click(editButton);
+    // Assert
     expect(mockOnEdit).toHaveBeenCalledWith(exampleBook);
   });
 
   it('calls onDelete with the book id when Eliminar button is clicked', () => {
+    // Arrange
     render(<BookCard book={exampleBook} onEdit={mockOnEdit} onDelete={mockOnDelete} />);
     const deleteButton = screen.getByText('Eliminar');
+    // Act
     fireEvent.click(deleteButton);
+    // Assert
     expect(mockOnDelete).toHaveBeenCalledWith(exampleBook.id);
   });
 });
