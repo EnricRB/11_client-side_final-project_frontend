@@ -24,8 +24,8 @@
   color: #555;
 }
 
-.formGroup input[type="text"],
-.formGroup input[type="number"],
+.formGroup input[type='text'],
+.formGroup input[type='number'],
 .formGroup select {
   width: 100%;
   padding: 10px;
@@ -66,4 +66,4 @@
 
 .cancelButton:hover {
   background-color: #c9302c;
-} 
+}

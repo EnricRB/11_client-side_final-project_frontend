@@ -22,7 +22,7 @@ type Book = {
   title: string;
   author: string;
   year: number;
-  status: "pending" | "in progress" | "read";
+  status: 'pending' | 'in progress' | 'read';
 };
 ```
 
