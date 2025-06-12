@@ -2,9 +2,9 @@ name: Format Check
 
 on:
   push:
-    branches: [main, develop]
+    branches: [ main, develop ]
   pull_request:
-    branches: [main, develop]
+    branches: [ main, develop ]
 
 jobs:
   format:
@@ -16,4 +16,4 @@ jobs:
           node-version: '20'
           cache: 'npm'
       - run: npm ci
-      - run: npx prettier --check .
+      - run: npx prettier --check . 
